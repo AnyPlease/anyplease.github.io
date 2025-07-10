@@ -1,102 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhruv Anand - AI Researcher</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dhruv Anand – AI Researcher & Engineer</title>
+    <!-- Link to Google Fonts for a modern, clean font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Link to our new stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Link to an icon library for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <canvas id="mandelbrot-canvas"></canvas>
 
+    <!-- ───── Navigation (stays fixed) ───── -->
     <nav class="navbar">
         <div class="container">
-            <a href="#" class="nav-brand">Dhruv Anand</a>
+            <a href="#home" class="nav-brand">Dhruv Anand</a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- ───── Hero with Video Background ───── -->
     <header id="home" class="hero">
-        <div class="container">
-            <h1 class="hero-title">AI Researcher</h1>
-            <p class="hero-intro">
-                Specializing in building and interpreting complex machine learning models. 
-                Currently exploring [Your Specific Interest].
-            </p>
-            <a href="DhruvAnand_CV.pdf" class="btn">View My CV</a>
+        <video autoplay muted loop playsinline id="hero-video">
+            <source src="mandelbrot_animation.webm" type="video/webm">
+            <source src="mandelbrot_animation.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Dhruv Anand</h1>
+            <p class="hero-intro">AI Researcher & Engineer</p>
+            <div class="hero-contact">
+                <a href="mailto:Dhruvanand046@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank" class="contact-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
         </div>
     </header>
 
+    <!-- ───── Main content starts here ───── -->
     <main>
+        <!-- About Section -->
         <section id="about" class="content-section">
             <div class="container">
                 <h2>About Me</h2>
-                <p>
-                    I am a passionate AI researcher driven by the goal of creating more robust and understandable machine learning models. My work focuses on [mention a specific area, e.g., attention mechanisms in Transformers, few-shot learning, etc.]. I am currently a researcher at [Your Institution] / a PhD candidate at [Your University]. My goal is to contribute to research that is not only innovative but also ethically conscious and beneficial to society.
-                </p>
+                <p class="section-subtitle">Aspiring Artificial Intelligence professional with expertise in robotics, machine learning, and automation. Proven ability to enhance system performance through innovative solutions in autonomous vehicles and industrial automation.</p>
             </div>
         </section>
 
+        <!-- Experience Section -->
         <section id="experience" class="content-section">
             <div class="container">
                 <h2>Experience</h2>
-                <div class="timeline-item">
-                    <h3>AI Research Intern</h3>
-                    <p><em>Tech Company Inc. | Summer 2024</em></p>
-                    <p>Contributed to a project on model compression for large language models, resulting in a 20% reduction in inference time.</p>
-                </div>
-                <div class="timeline-item">
-                    <h3>Graduate Research Assistant</h3>
-                    <p><em>[Your University] | 2023 - Present</em></p>
-                    <p>Investigated methods for [Your Research Topic]. Published findings in the [Conference/Journal Name] proceedings.</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Ongoing</div>
+                        <div class="timeline-content">
+                            <h3>Research - Probing Spatial Reasoning in LLMs</h3>
+                            <p class="timeline-company">Monash University (in partnership with Cambridge University)</p>
+                            <p>Evaluating large language models' spatial reasoning in 3D puzzles like Rubik's Cube, investigating modality preferences and solution optimality.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Mar 2022 - Mar 2023</div>
+                        <div class="timeline-content">
+                            <h3>Engineering Student Team Member</h3>
+                            <p class="timeline-company">Monash Connected Autonomous Vehicles</p>
+                            <p>Spearheaded controller development for a Level 3 Autonomous Vehicle, reducing latency by 4% through ROS2 node optimization and improving system efficiency by 10%.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Nov 2022 - Feb 2023</div>
+                        <div class="timeline-content">
+                            <h3>Automation and Robotics Internship</h3>
+                            <p class="timeline-company">Waves Aircon Pvt Ltd.</p>
+                            <p>Conducted time-motion studies to increase production efficiency by 4% and gained proficiency in MATLAB, SolidWorks, and ROS.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Projects Section -->
         <section id="projects" class="content-section">
             <div class="container">
-                <h2>Projects</h2>
+                <h2>Personal Projects</h2>
                 <div class="project-grid">
                     <div class="project-card">
-                        <h3>Neural Network Visualizer</h3>
-                        <p>A web-based tool to visualize the internal layers and activations of convolutional neural networks in real-time.</p>
-                        <div class="project-tags">
-                            <span>PyTorch</span>
-                            <span>JavaScript</span>
-                            <span>Flask</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="btn-secondary">Live Demo</a>
-                            <a href="#" class="btn-secondary">GitHub</a>
-                        </div>
+                        <h3>Sentiment Analysis Model</h3>
+                        <p>Designed a text analysis model achieving 92.4% accuracy for interpreting customer sentiments and trends from social media data.</p>
                     </div>
                     <div class="project-card">
-                        <h3>Paper Re-implementation: [Paper Name]</h3>
-                        <p>An implementation of the model described in the paper "[Paper Name]" to validate its results and explore its architecture.</p>
-                        <div class="project-tags">
-                            <span>TensorFlow</span>
-                            <span>Python</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="btn-secondary">GitHub</a>
-                        </div>
+                        <h3>Fine-Tuning for Generative Transformers</h3>
+                        <p>Fine-tuned pre-trained models using Low-Rank Adaptation (LoRA) for resource-efficient customization in domain-specific NLP applications.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>Object Detection System</h3>
+                        <p>Built a real-time object detection system using YOLO and OpenCV, achieving 85% accuracy for autonomous navigation applications.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>Reinforcement Learning for Robotic Arm</h3>
+                        <p>Implemented a Markov Decision Process (MDP) to optimize the motion of a 7-DOF robotic arm, achieving high precision in task execution.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="content-section">
+            <div class="container">
+                <h2>Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Programming & Scripting</h3>
+                        <p>Python, C++, MATLAB</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>AI & Machine Learning</h3>
+                        <p>TensorFlow, PyTorch, Keras, Scikit-learn, Computer Vision, NLP, Reinforcement Learning</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Data Analysis & Engineering</h3>
+                        <p>Pandas, NumPy, Matplotlib, Seaborn, SQL, Apache Spark</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Robotics & Control Systems</h3>
+                        <p>Robot Operating System (ROS), Simulink, Control Systems</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>Get in touch: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+            <p>&copy; 2025 Dhruv Anand</p>
+            <div class="footer-links">
+                <a href="mailto:Dhruvanand046@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
+        </div>
     </footer>
-    
-    <script src="mandelbrot.js"></script>
 
 </body>
 </html>
