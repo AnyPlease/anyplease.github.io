@@ -2,7 +2,7 @@
 :root {
     --bg-color: #121212;
     --surface-color: #1e1e1e;
-    --primary-color: #03dac6; /* A vibrant, techy teal */
+    --primary-color: #03dac6;
     --on-primary-color: #000000;
     --text-color: #e0e0e0;
     --text-secondary-color: #a0a0a0;
@@ -19,7 +19,7 @@ body {
     color: var(--text-color);
     background: var(--bg-color);
     line-height: 1.7;
-    padding-top: 70px; /* Offset for fixed navbar */
+    padding-top: 70px;
 }
 
 .container {
@@ -85,22 +85,20 @@ body {
     text-align: center;
 }
 
-#hero-video {
+#mandelbrot-canvas {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;
+    pointer-events: none;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6); /* Darker overlay for better text contrast */
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
 }
 

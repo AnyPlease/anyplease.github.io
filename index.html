@@ -28,13 +28,11 @@
         </div>
     </nav>
 
-    <!-- ───── Hero with Video Background ───── -->
+    <!-- ───── Hero with Real-Time Canvas Background ───── -->
     <header id="home" class="hero">
-        <video autoplay muted loop playsinline id="hero-video">
-            <source src="https://vimeo.com/1100340496" type="video/webm">
-            <source src="https://vimeo.com/1100340375" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <!-- We are back to using a canvas for a lightweight, real-time animation -->
+        <canvas id="mandelbrot-canvas"></canvas>
+        
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">Dhruv Anand</h1>
@@ -153,6 +151,9 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Link to the new, optimized JavaScript file -->
+    <script src="mandelbrot.js"></script>
 
 </body>
 </html>
