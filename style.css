@@ -177,7 +177,7 @@ h2 {
     display: flex;
     align-items: center;
     font-family: "SF Mono", "Fira Code", "Courier New", monospace;
-    font-size: 1.9rem;
+    font-size: 2rem;
     font-weight: 400;
     color: var(--text-secondary-color);
     margin: 0 0 40px;
