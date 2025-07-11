@@ -2,16 +2,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const sections = document.querySelectorAll('.content-section');
 
     const options = {
-        root: null, // it is the viewport
-        threshold: 0.1, // 10% of the item must be visible
+        root: null,
+        threshold: 0.1,
         rootMargin: "0px"
     };
 
     const observer = new IntersectionObserver(function (entries, observer) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Stop observing once it's visible
+                // Add the animation class
+                entry.target.classList.add('fade-in-section');
+                observer.unobserve(entry.target);
             }
         });
     }, options);

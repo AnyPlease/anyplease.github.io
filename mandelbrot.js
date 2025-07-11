@@ -11,13 +11,15 @@ const RESOLUTION_SCALE = 0.5; // Render at a lower resolution for performance
 const MAX_ITER = 50;          // Iteration count for detail
 
 // --- Zoom & Pan Parameters ---
-// CHANGED: Start zoomed out with a smaller initial zoom value.
 let zoom = 2.0;
-const ZOOM_SENSITIVITY = 1.1; // Slightly increased sensitivity for a better feel
+const ZOOM_SENSITIVITY = 1.1;
 const CENTER_X = -0.745;
 const CENTER_Y = 0.186;
 
-// --- STEP 1: EMBED THE WORKER CODE ---
+// --- Visibility State ---
+let isCanvasVisible = false;
+
+// --- EMBED THE WORKER CODE ---
 const workerCode = `
 self.onmessage = (e) => {
     const { width, height, zoom, centerX, centerY, maxIter } = e.data;
@@ -87,7 +89,7 @@ function hslToRgb(h, s, l) {
 }
 `;
 
-// --- STEP 2: CREATE THE WORKER FROM THE EMBEDDED CODE ---
+// --- CREATE THE WORKER FROM THE EMBEDDED CODE ---
 const blob = new Blob([workerCode], { type: 'application/javascript' });
 const workerURL = URL.createObjectURL(blob);
 const worker = new Worker(workerURL);
@@ -97,7 +99,7 @@ let isWorkerBusy = false;
 worker.onmessage = (e) => {
     const imageData = e.data;
     ctx.putImageData(imageData, 0, 0);
-    isWorkerBusy = false; 
+    isWorkerBusy = false;
 };
 
 // --- Core Functions ---
@@ -105,7 +107,7 @@ worker.onmessage = (e) => {
 function requestDraw() {
     if (isWorkerBusy) return;
     isWorkerBusy = true;
-    
+
     worker.postMessage({
         width: canvas.width,
         height: canvas.height,
@@ -124,14 +126,17 @@ function setupCanvas() {
     requestDraw();
 }
 
+// --- Event Listeners ---
+
 let debounceTimer;
 
 window.addEventListener('wheel', (event) => {
-    // CHANGED: Invert the logic to zoom IN on scroll down...
+    // Only zoom if the canvas is visible
+    if (!isCanvasVisible) return;
+
     if (event.deltaY > 0) {
         zoom *= ZOOM_SENSITIVITY;
     } else {
-        // ...and zoom OUT on scroll up.
         zoom /= ZOOM_SENSITIVITY;
     }
 
@@ -140,5 +145,15 @@ window.addEventListener('wheel', (event) => {
 });
 
 window.addEventListener('resize', setupCanvas, { passive: true });
+
+// --- Intersection Observer ---
+const observer = new IntersectionObserver(
+    ([entry]) => {
+        isCanvasVisible = entry.isIntersecting;
+    },
+    { threshold: 0.5 } // Consider it visible if 10% is showing
+);
+
+observer.observe(canvas);
 
 setupCanvas();
