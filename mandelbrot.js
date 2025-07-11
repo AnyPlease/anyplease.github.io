@@ -1,120 +1,69 @@
 /*
-  Real-Time Mandelbrot Animation (Optimized for Performance)
+  Mandelbrot Background: Scroll-to-Zoom (Optimized with an Embedded Web Worker)
 */
 
 // --- Core Elements ---
 const canvas = document.getElementById("mandelbrot-canvas");
 const ctx = canvas.getContext("2d");
 
-// --- Performance & Animation Parameters ---
+// --- Performance & Drawing Parameters ---
+const RESOLUTION_SCALE = 0.5; // Render at a lower resolution for performance
+const MAX_ITER = 50;          // Iteration count for detail
 
-// **OPTIMIZATION 1: Lower Iteration Count**
-// This is the biggest factor for performance. Lower values are much faster.
-// 50 provides a good balance between detail and speed for a background.
-const MAX_ITER = 50;
-
-// **OPTIMIZATION 2: Render at a Lower Resolution**
-// We'll set the canvas's internal resolution to be a fraction of its
-// display size. The browser will scale it up, which is very fast.
-// A value of 0.5 means we calculate 1/4 of the pixels.
-const RESOLUTION_SCALE = 0.5;
-
-// Animation parameters
-let zoom = 1.0;
-const ZOOM_SPEED = 8000; // Time in ms for a full zoom cycle
-const START_ZOOM = 1.0;
-const END_ZOOM = 250.0; // Increased zoom for more effect
-
-// --- CORRECTED COORDINATES ---
-// Target the visually interesting "Seahorse Valley" region
+// --- Zoom & Pan Parameters ---
+// CHANGED: Start zoomed out with a smaller initial zoom value.
+let zoom = 2.0;
+const ZOOM_SENSITIVITY = 1.1; // Slightly increased sensitivity for a better feel
 const CENTER_X = -0.745;
 const CENTER_Y = 0.186;
 
-// --- Color Palette ---
-// Pre-calculating the color palette is more efficient than doing it each frame.
-const palette = new Array(MAX_ITER + 1);
-for (let i = 0; i <= MAX_ITER; i++) {
-    if (i === MAX_ITER) {
-        palette[i] = [0, 0, 0]; // Black for points inside the set
-    } else {
-        // Create a smooth color gradient
-        const hue = (i / MAX_ITER) ** 0.5; // Use sqrt for a nicer color distribution
-        palette[i] = hslToRgb(hue * 360, 1, 0.5);
-    }
-}
-
-// --- Main Drawing & Animation Loop ---
-
-let startTime = null;
-
-function animate(timestamp) {
-    if (!startTime) {
-        startTime = timestamp;
-    }
-    const elapsedTime = timestamp - startTime;
-
-    // Use a sine wave for a smooth, looping zoom effect
-    const zoomProgress = 0.5 + 0.5 * Math.sin(elapsedTime / ZOOM_SPEED);
-    zoom = START_ZOOM + (END_ZOOM - START_ZOOM) * zoomProgress;
-    
-    draw();
-    requestAnimationFrame(animate);
-}
-
-function draw() {
-    const w = canvas.width;
-    const h = canvas.height;
-    const aspect = w / h;
-
+// --- STEP 1: EMBED THE WORKER CODE ---
+const workerCode = `
+self.onmessage = (e) => {
+    const { width, height, zoom, centerX, centerY, maxIter } = e.data;
+    const palette = generatePalette(maxIter);
     const viewWidth = 5 / zoom;
-    const viewHeight = viewWidth / aspect;
-
-    const xmin = CENTER_X - viewWidth / 2;
-    const ymin = CENTER_Y - viewHeight / 2;
-
-    const img = ctx.createImageData(w, h);
+    const viewHeight = viewWidth / (width / height);
+    const xmin = centerX - viewWidth / 2;
+    const ymin = centerY - viewHeight / 2;
+    const img = new ImageData(width, height);
     const buf = img.data;
 
-    // Loop through each pixel of the scaled-down canvas
-    for (let py = 0; py < h; py++) {
-        const y0 = ymin + (py / h) * viewHeight;
-        for (let px = 0; px < w; px++) {
-            const x0 = xmin + (px / w) * viewWidth;
-
+    for (let py = 0; py < height; py++) {
+        const y0 = ymin + (py / height) * viewHeight;
+        for (let px = 0; px < width; px++) {
+            const x0 = xmin + (px / width) * viewWidth;
             let x = 0, y = 0, iter = 0;
-            while (x * x + y * y <= 4 && iter < MAX_ITER) {
+            while (x * x + y * y <= 4 && iter < maxIter) {
                 const xt = x * x - y * y + x0;
                 y = 2 * x * y + y0;
                 x = xt;
                 iter++;
             }
-            
-            const p_idx = (py * w + px) * 4;
+            const p_idx = (py * width + px) * 4;
             const [r, g, b] = palette[iter];
             buf[p_idx] = r;
             buf[p_idx + 1] = g;
             buf[p_idx + 2] = b;
-            buf[p_idx + 3] = 255; // Alpha
+            buf[p_idx + 3] = 255;
         }
     }
-    ctx.putImageData(img, 0, 0);
+    self.postMessage(img, [img.data.buffer]);
+};
+
+function generatePalette(maxIter) {
+    const palette = new Array(maxIter + 1);
+    for (let i = 0; i <= maxIter; i++) {
+        if (i === maxIter) {
+            palette[i] = [0, 0, 0];
+        } else {
+            const hue = (i / maxIter) ** 0.5;
+            palette[i] = hslToRgb(hue * 360, 1, 0.5);
+        }
+    }
+    return palette;
 }
 
-// --- Setup ---
-
-function setupCanvas() {
-    // Get the display size of the canvas
-    const displayWidth = canvas.clientWidth;
-    const displayHeight = canvas.clientHeight;
-
-    // Set the internal (drawing) resolution based on the scale factor
-    canvas.width = displayWidth * RESOLUTION_SCALE;
-    canvas.height = displayHeight * RESOLUTION_SCALE;
-    
-    // The CSS will automatically scale this smaller canvas up to 100% width/height
-}
-
-// HSL to RGB color conversion utility
 function hslToRgb(h, s, l) {
     let r, g, b;
     if (s == 0) {
@@ -136,8 +85,60 @@ function hslToRgb(h, s, l) {
     }
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
+`;
 
-// --- Kick-off ---
-window.addEventListener('resize', setupCanvas);
+// --- STEP 2: CREATE THE WORKER FROM THE EMBEDDED CODE ---
+const blob = new Blob([workerCode], { type: 'application/javascript' });
+const workerURL = URL.createObjectURL(blob);
+const worker = new Worker(workerURL);
+
+let isWorkerBusy = false;
+
+worker.onmessage = (e) => {
+    const imageData = e.data;
+    ctx.putImageData(imageData, 0, 0);
+    isWorkerBusy = false; 
+};
+
+// --- Core Functions ---
+
+function requestDraw() {
+    if (isWorkerBusy) return;
+    isWorkerBusy = true;
+    
+    worker.postMessage({
+        width: canvas.width,
+        height: canvas.height,
+        zoom: zoom,
+        centerX: CENTER_X,
+        centerY: CENTER_Y,
+        maxIter: MAX_ITER
+    });
+}
+
+function setupCanvas() {
+    const displayWidth = canvas.clientWidth;
+    const displayHeight = canvas.clientHeight;
+    canvas.width = displayWidth * RESOLUTION_SCALE;
+    canvas.height = displayHeight * RESOLUTION_SCALE;
+    requestDraw();
+}
+
+let debounceTimer;
+
+window.addEventListener('wheel', (event) => {
+    // CHANGED: Invert the logic to zoom IN on scroll down...
+    if (event.deltaY > 0) {
+        zoom *= ZOOM_SENSITIVITY;
+    } else {
+        // ...and zoom OUT on scroll up.
+        zoom /= ZOOM_SENSITIVITY;
+    }
+
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(requestDraw, 100);
+});
+
+window.addEventListener('resize', setupCanvas, { passive: true });
+
 setupCanvas();
-requestAnimationFrame(animate);

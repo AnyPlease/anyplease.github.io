@@ -24,7 +24,7 @@ body {
 
 .container {
     max-width: 1000px;
-    margin: 0 auto 0 8%; 
+    margin: 0 auto 0 8%;
     padding: 0 24px;
 }
 
@@ -35,9 +35,9 @@ body {
     left: 0;
     right: 0;
     height: 50px;
-    background: rgba(18, 18, 18, 0.8);
+    background: rgba(18, 18, 18, 0.85); /* Slightly more opaque background */
     border-bottom: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); REMOVED FOR PERFORMANCE */
     z-index: 1000;
 }
 
@@ -99,13 +99,19 @@ body {
 
 /* ───────── Hero Section ───────── */
 .hero {
-    position: relative;
+    position: relative; /* This is the positioning parent */
     height: 100vh;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
+}
+
+/* Foreground Fractal Tree Canvas */
+#fractal-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    pointer-events: none; /* Allows clicks to go "through" the canvas */
 }
 
 #mandelbrot-canvas {
@@ -114,21 +120,26 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 3;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
+    /* This block is now reliably centered */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
     color: #fff;
+    width: 90%; /* Give it width to prevent wrapping */
 }
 
 .hero-title {
@@ -323,68 +334,48 @@ h2::after {
 
 /* ───────── Media Queries for Responsive Design ───────── */
 
-/* For tablets and smaller laptops (up to 1024px) */
 @media (max-width: 1024px) {
     .hero-title {
-        font-size: 3.5rem; /* Reduce font size for the main title */
+        font-size: 3.5rem;
     }
-
     .hero-intro {
         font-size: 1.25rem;
     }
 }
 
-/* For mobile devices (up to 768px) */
 @media (max-width: 768px) {
     body {
         line-height: 1.6;
     }
-
     .nav-links {
-        /* On small screens, the nav links can be hidden
-           behind a hamburger menu. For a simpler approach
-           without JavaScript, we can reduce the gap or stack them.
-           For this case, we just reduce the gap. */
         gap: 20px;
     }
-
     .hero-title {
-        font-size: 2.5rem; /* Further reduce font size for mobile */
+        font-size: 2.5rem;
     }
-
     .hero-intro {
         font-size: 1.1rem;
         margin: 0 0 2.5rem;
     }
-
     .content-section {
-        padding: 80px 0; /* Reduce vertical space */
+        padding: 80px 0;
     }
-
     .section-subtitle {
         margin-bottom: 40px;
     }
-
-    /* Adjust the timeline for a more compact view on mobile */
     .timeline::after {
-        left: 20px; /* Move timeline bar to the left */
+        left: 20px;
     }
-
     .timeline-item {
-        /* Remove horizontal padding and use a simpler left padding */
         padding: 10px 0 30px 50px;
-        width: auto; /* Allow the item to take the full available width */
+        width: auto;
     }
-
     .timeline-dot {
-        left: 12px; /* Reposition the dot */
+        left: 12px;
     }
-
     .timeline-content h3 {
-        font-size: 1.25rem; /* Reduce heading size to prevent overflow */
+        font-size: 1.25rem;
     }
-
-    /* Make grids single-column on very small screens */
     .project-grid, .skills-grid {
         grid-template-columns: 1fr;
     }
@@ -392,12 +383,12 @@ h2::after {
 
 /* Styles for scroll-reveal animation */
 .content-section {
-    opacity: 0; /* Initially hide the sections */
-    transform: translateY(20px); /* Move them down slightly */
+    opacity: 0;
+    transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .content-section.visible {
-    opacity: 1; /* Make sections visible */
-    transform: translateY(0); /* Move them back to their original position */
+    opacity: 1;
+    transform: translateY(0);
 }

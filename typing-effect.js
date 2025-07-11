@@ -1,13 +1,15 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var options = {
-        strings: ["Hi, I'm dhruv"],
-        typeSpeed: 50,  // Speed of typing in milliseconds
-        backSpeed: 50,   // Speed of deleting in milliseconds
-        loop: false,     // Do not loop the animation
-        showCursor: true, // Show the blinking cursor
-        cursorChar: '|',  // Set the cursor character
-        contentType: 'html', // Ensure it renders HTML correctly
-    };
+document.addEventListener('DOMContentLoaded', () => {
+  const target = document.getElementById('typed-name');
 
-    var typed = new Typed('#typed-name', options);
+  const observer = new IntersectionObserver(([entry], obs) => {
+    if(!entry.isIntersecting) return;
+    new Typed('#typed-name', {
+      strings:["Hi, I'm Dhruv"],
+      typeSpeed:50, backSpeed:40, loop:false,
+      showCursor:true, cursorChar:'|'
+    });
+    obs.disconnect();           // run exactly once
+  }, { threshold:0.5 });
+
+  observer.observe(target);
 });
