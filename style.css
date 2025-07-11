@@ -24,7 +24,7 @@ body {
 
 .container {
     max-width: 1000px;
-    margin: 0 auto 0 8%;
+    margin: 0 auto;
     padding: 0 24px;
 }
 
@@ -177,7 +177,7 @@ body {
 /* ───────── Content Sections ───────── */
 .content-section {
     padding: 100px 0;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: none
 }
 
 .content-section:last-of-type {
@@ -206,7 +206,6 @@ h2::after {
     text-align: left;
     font-size: 1.2rem;
     color: var(--text-secondary-color);
-    max-width: 700px;
     margin: 0 0 60px; /* Removed auto for centering */
 }
 

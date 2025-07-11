@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver(([entry], obs) => {
     if(!entry.isIntersecting) return;
     new Typed('#typed-name', {
-      strings:["Hi, I'm Dhruv"],
+      strings:["Hi, I'm Dhruv."],
       typeSpeed:50, backSpeed:40, loop:false,
       showCursor:true, cursorChar:'|'
     });
