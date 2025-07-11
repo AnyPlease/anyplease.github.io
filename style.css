@@ -5,7 +5,7 @@
     --primary-color: #03dac6;
     --on-primary-color: #000000;
     --text-color: #e0e0e0;
-    --text-secondary-color: #a0a0a0;
+    --text-secondary-color: #f6f0f0;
     --border-color: #2c2c2c;
 }
 
@@ -19,12 +19,12 @@ body {
     color: var(--text-color);
     background: var(--bg-color);
     line-height: 1.7;
-    padding-top: 70px;
+    padding-top: 50px;
 }
 
 .container {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 auto 0 8%; 
     padding: 0 24px;
 }
 
@@ -34,7 +34,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 70px;
+    height: 50px;
     background: rgba(18, 18, 18, 0.8);
     border-bottom: 1px solid var(--border-color);
     backdrop-filter: blur(10px);
@@ -45,7 +45,7 @@ body {
     display: flex;
     align-items: center;
     height: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .nav-brand {
@@ -59,7 +59,7 @@ body {
     list-style: none;
     display: flex;
     gap: 30px;
-    margin: 0;
+    margin: 0 0 0 40px; /* Changed from margin: 0 */
     padding: 0;
 }
 
@@ -72,6 +72,29 @@ body {
 
 .nav-links a:hover {
     color: var(--primary-color);
+}
+
+/* Add this to your navigation styles */
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px; /* Position the underline below the link */
+    left: 0;
+    background-color: var(--primary-color);
+    transform: scaleX(0); /* Initially hide the underline */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1); /* Show underline on hover */
+    transform-origin: bottom left;
 }
 
 /* ───────── Hero Section ───────── */
@@ -151,25 +174,36 @@ body {
 }
 
 h2 {
-    font-size: 2.5rem;
-    text-align: center;
-    margin: 0 0 1rem;
-    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--text-secondary-color);
+    margin: 0 0 40px;
+}
+
+h2::after {
+    content: '';
+    flex-grow: 1; /* This makes the line expand */
+    height: 1px;
+    background-color: var(--text-secondary-color);
+    margin-left: 20px; /* Adds space between the text and the line */
 }
 
 .section-subtitle {
-    text-align: center;
+    text-align: left;
     font-size: 1.2rem;
     color: var(--text-secondary-color);
     max-width: 700px;
-    margin: 0 auto 60px;
+    margin: 0 0 60px; /* Removed auto for centering */
 }
 
 /* ───────── Experience Timeline ───────── */
 .timeline {
     position: relative;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0;
 }
 
 .timeline::after {
@@ -230,17 +264,19 @@ h2 {
     gap: 30px;
 }
 
+/* ───────── Projects Grid ───────── */
 .project-card {
     background-color: var(--surface-color);
     padding: 30px;
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Added border-color transition */
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(3, 218, 198, 0.1); /* Subtle glow effect */
+    border-color: var(--primary-color); /* Highlight border on hover */
 }
 
 .project-card h3 {
@@ -295,10 +331,6 @@ h2 {
 
     .hero-intro {
         font-size: 1.25rem;
-    }
-
-    h2 {
-        font-size: 2.2rem; /* Slightly smaller section headers */
     }
 }
 
@@ -356,4 +388,16 @@ h2 {
     .project-grid, .skills-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Styles for scroll-reveal animation */
+.content-section {
+    opacity: 0; /* Initially hide the sections */
+    transform: translateY(20px); /* Move them down slightly */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.content-section.visible {
+    opacity: 1; /* Make sections visible */
+    transform: translateY(0); /* Move them back to their original position */
 }
