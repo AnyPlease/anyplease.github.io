@@ -169,11 +169,34 @@
     </div>
   </footer>
 
+  <!-- Chat widget (drop near the end of <body>) -->
+  <section id="chat" class="content-section">
+    <div class="container">
+      <h2>Ask my LLM anything</h2>
+
+      <div id="chat-box" class="chat-box">
+        <!-- Generated messages will appear here -->
+      </div>
+
+      <form id="chat-form" class="chat-form">
+        <input id="chat-input"
+              type="text"
+              placeholder="Type your question…"
+              autocomplete="off"
+              required />
+        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </section>
+
+
   <!-- Scripts -->
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
   <script src="mandelbrot.js" defer></script>
   <script src="fractal-tree.js" defer></script>
   <script src="typing-effect.js" defer></script>
   <script src="scroll-reveal.js" defer></script>
+  <script src="chat.js" defer></script>
+
 </body>
 </html>
