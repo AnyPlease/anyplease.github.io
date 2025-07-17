@@ -10,8 +10,8 @@ const box   = document.getElementById('chat-box');
 -------------------------------------------------------------------*/
 const API_URL =
   ['localhost', '127.0.0.1'].includes(window.location.hostname)
-    ? 'http://localhost:8000/generate'          // dev
-    : 'https://api.dhruv.dev/generate';         // prod
+    ? 'http://localhost:8000/generate'                   // local dev
+    : 'https://worldwide-reported-lowest-genome.trycloudflare.com/generate';  // public
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
