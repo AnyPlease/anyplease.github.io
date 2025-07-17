@@ -8,7 +8,7 @@ const box   = document.getElementById('chat-box');
    – localhost / 127.0.0.1  →  talk to the dev server directly
    – anything else          →  hit your public Nginx + FastAPI instance
 -------------------------------------------------------------------*/
-const API_URL = "https://worldwide-reported-lowest-genome.trycloudflare.com/generate";
+const API_URL = "https://earliest-merchant-flip-authority.trycloudflare.com";
 
 
 form.addEventListener('submit', async (e) => {
