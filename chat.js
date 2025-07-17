@@ -9,7 +9,7 @@ const box   = document.getElementById('chat-box');
    – anything else          →  hit your public Nginx + FastAPI instance
 -------------------------------------------------------------------*/
 // chat.js  – production URL
-const API_URL = "https://building-uri-circulation-ga.trycloudflare.com";
+const API_URL = "https://building-uri-circulation-ga.trycloudflare.com/generate";
 
 
 form.addEventListener('submit', async (e) => {
@@ -24,7 +24,7 @@ form.addEventListener('submit', async (e) => {
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, max_new_tokens: 128 })
+      body: JSON.stringify({ text, max_new_tokens: 64 })
     });
 
     if (!res.ok) {
