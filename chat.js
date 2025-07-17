@@ -8,10 +8,7 @@ const box   = document.getElementById('chat-box');
    – localhost / 127.0.0.1  →  talk to the dev server directly
    – anything else          →  hit your public Nginx + FastAPI instance
 -------------------------------------------------------------------*/
-const API_URL =
-  ['localhost', '127.0.0.1'].includes(window.location.hostname)
-    ? 'http://localhost:8000/generate'                   // local dev
-    : 'https://worldwide-reported-lowest-genome.trycloudflare.com/generate';  // public
+const API_URL = "https://api.dhruv.dev/generate";
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
