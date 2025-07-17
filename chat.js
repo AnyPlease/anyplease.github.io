@@ -8,7 +8,8 @@ const box   = document.getElementById('chat-box');
    – localhost / 127.0.0.1  →  talk to the dev server directly
    – anything else          →  hit your public Nginx + FastAPI instance
 -------------------------------------------------------------------*/
-const API_URL = "https://earliest-merchant-flip-authority.trycloudflare.com";
+// chat.js  – production URL
+const API_URL = "https://verification-dale-mode-poly.trycloudflare.com/generate";
 
 
 form.addEventListener('submit', async (e) => {
