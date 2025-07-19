@@ -36,7 +36,7 @@ form.addEventListener('submit', async (e) => {
     addMessage('bot', completion);
   } catch (err) {
     console.error(err);
-    addMessage('bot', '⚠️ Oops, something went wrong. Check console.');
+    addMessage('bot', '⚠️Oops! Server offline, please contact me to activate the server');
   }
 
   // autoscroll to newest message
