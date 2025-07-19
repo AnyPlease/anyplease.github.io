@@ -9,7 +9,7 @@ const box   = document.getElementById('chat-box');
    – anything else          →  hit your public Nginx + FastAPI instance
 -------------------------------------------------------------------*/
 // chat.js  – production URL
-const API_URL = "https://building-uri-circulation-ga.trycloudflare.com/generate";
+const API_URL = "https://symantec-debian-nh-wake.trycloudflare.com/generate";
 
 
 form.addEventListener('submit', async (e) => {
