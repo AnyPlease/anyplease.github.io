@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="description" content="Dhruv Anand – AI researcher, software engineer. Portfolio, resume, and projects.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="description" content="Dhruv Anand – AI researcher, software engineer. Portfolio, resume, and projects." />
   <title>Dhruv Anand | AI Researcher & Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Icons (removed broken integrity attr to avoid blocking) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 </head>
 <body>
   <!-- Navigation -->
@@ -28,18 +39,23 @@
 
   <!-- Hero -->
   <header id="home" class="hero">
+    <!-- Background canvases -->
     <canvas id="mandelbrot-canvas" aria-hidden="true">Mandelbrot fractal animation</canvas>
-    <canvas id="fractal-canvas"
-        data-offset-x="0"
-        data-offset-y="-40"
-        data-scale="1.05"
-        data-base-len="70"
-        data-max-depth="10"
-        aria-hidden="true"></canvas>
-    <div class="hero-overlay"></div>
+    <canvas
+      id="fractal-canvas"
+      data-offset-x="0"
+      data-offset-y="-40"
+      data-scale="1.05"
+      data-base-len="70"
+      data-max-depth="10"
+      aria-hidden="true"
+    ></canvas>
+
+    <div class="hero-overlay" aria-hidden="true"></div>
+
     <div class="hero-content">
-      <h1 class="hero-title"><span id="typed-name"></span></h1>
-      <p class="hero-subtitle">AI Researcher • Software Engineer • Robotics Enthusiast</p>
+      <h1 id="hero-title" class="hero-title"><span id="typed-name"></span></h1>
+      <p class="hero-subtitle">AI Researcher • Machine Learning Engineer • Robotics Enthusiast</p>
       <div class="hero-buttons">
         <a href="mailto:dhruvanand046@gmail.com" class="btn"><i class="fas fa-envelope"></i> Email Me</a>
         <a href="https://www.linkedin.com/in/dhruv-anand-56b42b14a/" target="_blank" rel="noopener" class="btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
@@ -55,7 +71,7 @@
       <div class="container">
         <h2>/ About Me</h2>
         <p class="section-subtitle">
-          Masters student in Artificial Intelligence at Monash University, building trustworthy multimodal LLMs and autonomous systems. I thrive at the intersection of research and engineering,rapidly prototyping ideas, shipping production-ready code and telling compelling data-driven stories.
+          Masters student in Artificial Intelligence at Monash University, building trustworthy multimodal LLMs and autonomous systems. I thrive at the intersection of research and engineering, rapidly prototyping ideas, shipping production-ready code and telling compelling data-driven stories.
         </p>
       </div>
     </section>
@@ -68,39 +84,39 @@
 
           <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="timeline-date">Dec 2024 – Present</div>
+            <div class="timeline-date">Dec 2024 – Present</div>
             <div class="timeline-content">
               <h3>Artificial Intelligence Researcher</h3>
               <p class="timeline-company">Monash University • Cambridge University</p>
               <ul>
-                <li>Lead author of the <em>Cubic Cognition Benchmark</em>, a 100k‑instance suite for multimodal spatial reasoning.</li>
-                <li>Co‑authoring survey on multimodal LLM spatial reasoning (under EMNLP 2026 review).</li>
+                <li>Lead author of the <em>Cubic Cognition Benchmark</em>, a 100k-instance suite for multimodal spatial reasoning.</li>
+                <li>Co-authoring survey on multimodal LLM spatial reasoning (under EMNLP 2026 review).</li>
               </ul>
             </div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="timeline-date">Mar 2022 – Mar 2023</div>
+            <div class="timeline-date">Mar 2022 - Mar 2023</div>
             <div class="timeline-content">
               <h3>Software Engineer</h3>
               <p class="timeline-company">Monash Connected Autonomous Vehicles</p>
               <ul>
-                <li>Redesigned ROS 2 communication pipeline, cutting controller latency by 4%.</li>
-                <li>Developed modular autonomous‑drive packages improving system efficiency by 10%.</li>
+                <li>Redesigned ROS 2 communication pipeline, cutting controller latency by 4%.</li>
+                <li>Developed modular autonomous-drive packages improving system efficiency by 10%.</li>
               </ul>
             </div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="timeline-date">Nov 2022 – Feb 2023</div>
+            <div class="timeline-date">Nov 2022 - Feb 2023</div>
             <div class="timeline-content">
               <h3>Automation & Robotics Intern</h3>
-              <p class="timeline-company">Waves Aircon Pvt Ltd</p>
+              <p class="timeline-company">Waves Aircon Pvt Ltd</p>
               <ul>
                 <li>Optimised HVAC production lines, lifting throughput by 4%.</li>
-                <li>Built predictive‑maintenance model using Python ML libraries.</li>
+                <li>Built predictive-maintenance model using Python ML libraries.</li>
               </ul>
             </div>
           </div>
@@ -114,25 +130,23 @@
       <div class="container">
         <h2>/ Projects</h2>
         <div class="project-grid">
-
           <article class="project-card">
-            <h3>LoRA Fine‑Tuning Toolkit</h3>
-            <p>Cut GPU memory by 70% for GPT‑2 and Llama‑7B fine‑tuning while retaining perplexity within 2 pp of full‑parameter training.</p>
+            <h3>LoRA Fine-Tuning Toolkit</h3>
+            <p>Cut GPU memory by 70% for GPT-2 and Llama-7B fine-tuning while retaining perplexity within 2 pp of full-parameter training.</p>
             <a href="https://github.com/AnyPlease/lora-finetune" target="_blank" rel="noopener" class="project-link">Code&nbsp;<i class="fas fa-arrow-up-right-from-square"></i></a>
           </article>
 
           <article class="project-card">
-            <h3>Transformer‑Based Creative Text Generator</h3>
-            <p>Achieved 0.84 BLEU and 92% human‑readability on Creative Writing Benchmark; deployed as auto‑scaling AWS Fargate microservice.</p>
+            <h3>Transformer-Based Creative Text Generator</h3>
+            <p>Achieved 0.84 BLEU and 92% human-readability on Creative Writing Benchmark; deployed as auto-scaling AWS Fargate microservice.</p>
             <a href="https://github.com/AnyPlease/creative-transformer" target="_blank" rel="noopener" class="project-link">Code&nbsp;<i class="fas fa-arrow-up-right-from-square"></i></a>
           </article>
 
           <article class="project-card">
-            <h3>RL Controller for 7‑DOF Robotic Arm</h3>
-            <p>Trained PPO agent in PyBullet reaching ≤ 1.5 cm accuracy; deployed on Franka Panda via ROS 2 for cluttered pick‑and‑place.</p>
+            <h3>RL Controller for 7-DOF Robotic Arm</h3>
+            <p>Trained PPO agent in PyBullet reaching ≤ 1.5 cm accuracy; deployed on Franka Panda via ROS 2 for cluttered pick-and-place.</p>
             <a href="#" class="project-link disabled">Case study coming soon</a>
           </article>
-
         </div>
       </div>
     </section>
@@ -148,7 +162,7 @@
           </div>
           <div class="skill-category">
             <h3>Frameworks & Libraries</h3>
-            <p>PyTorch • TensorFlow • scikit‑learn • ROS 2 • OpenCV • Apache Spark</p>
+            <p>PyTorch • TensorFlow • scikit-learn • ROS 2 • OpenCV • Apache Spark</p>
           </div>
           <div class="skill-category">
             <h3>DevOps & Cloud</h3>
@@ -166,7 +180,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Dhruv Anand</p>
+      <p>&copy; 2025 Dhruv Anand</p>
       <div class="footer-links">
         <a href="mailto:dhruvanand046@gmail.com"><i class="fas fa-envelope"></i><span class="sr-only">Email</span></a>
         <a href="https://www.linkedin.com/in/dhruv-anand-56b42b14a/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i><span class="sr-only">LinkedIn</span></a>
@@ -175,27 +189,26 @@
     </div>
   </footer>
 
-  <!-- Chat widget (drop near the end of <body>) -->
+  <!-- Chat widget -->
   <section id="chat" class="content-section">
     <div class="container">
       <h2>/ Ask my LLM anything</h2>
       <h3>Note: I use my own server to run the LLM, so it may take a while to respond.</h3>
 
-      <div id="chat-box" class="chat-box">
-        <!-- Generated messages will appear here -->
-      </div>
+      <div id="chat-box" class="chat-box"></div>
 
       <form id="chat-form" class="chat-form">
-        <input id="chat-input"
-              type="text"
-              placeholder="Type your question…"
-              autocomplete="off"
-              required />
+        <input
+          id="chat-input"
+          type="text"
+          placeholder="Type your question…"
+          autocomplete="off"
+          required
+        />
         <button type="submit"><i class="fas fa-paper-plane"></i></button>
       </form>
     </div>
   </section>
-
 
   <!-- Scripts -->
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
@@ -204,6 +217,5 @@
   <script src="typing-effect.js" defer></script>
   <script src="scroll-reveal.js" defer></script>
   <script src="chat.js" defer></script>
-
 </body>
 </html>
