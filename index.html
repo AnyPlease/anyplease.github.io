@@ -29,7 +29,13 @@
   <!-- Hero -->
   <header id="home" class="hero">
     <canvas id="mandelbrot-canvas" aria-hidden="true">Mandelbrot fractal animation</canvas>
-    <canvas id="fractal-canvas" aria-hidden="true">Fractal tree animation</canvas>
+    <canvas id="fractal-canvas"
+        data-offset-x="0"
+        data-offset-y="-40"
+        data-scale="1.05"
+        data-base-len="70"
+        data-max-depth="10"
+        aria-hidden="true"></canvas>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title"><span id="typed-name"></span></h1>
@@ -194,7 +200,7 @@
   <!-- Scripts -->
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
   <script src="mandelbrot.js" defer></script>
-  <script src="fractal-tree.offscreen.js" defer></script>
+  <script src="fractal-tree.canvas.js" defer></script>
   <script src="typing-effect.js" defer></script>
   <script src="scroll-reveal.js" defer></script>
   <script src="chat.js" defer></script>
